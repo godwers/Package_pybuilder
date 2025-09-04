@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-PROJECT_NAME=$1
 function create_virtual_enviroment() {
   mkdir "venv"
   python -m venv venv/
@@ -36,4 +35,7 @@ function package_builder() {
   create_virtual_enviroment
 }
 
+echo "What's the name of your project?"
+read -r PROJECT_NAME
 package_builder "$PROJECT_NAME"
+echo "Completed! :)"
