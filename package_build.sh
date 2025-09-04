@@ -1,8 +1,12 @@
 #!/usr/bin/bash
+# read from the bottom to the top to understand the code
 
 function create_virtual_enviroment() {
+  printf "Creating virtual enviroment...\n"
   mkdir "venv"
   python -m venv venv/
+  printf "Activating virtual enviroment...\n"
+  source venv/bin/activate
 }
 
 function create_source_files() {
@@ -14,8 +18,8 @@ function create_source_files() {
 }
 
 function create_files() {
+  printf "Creating files...\n"
   touch ".gitignore"
-  touch "setup.py"
   touch "README.md"
   touch "LICENSE"
   touch "pyproject.toml"
@@ -35,7 +39,24 @@ function package_builder() {
   create_virtual_enviroment
 }
 
-echo "What's the name of your project?"
-read -r PROJECT_NAME
-package_builder "$PROJECT_NAME"
-echo "Completed! :)"
+function package_configuration() {
+  printf "Configuring the package...\n"
+  python -m pip install .
+  python -m pip install --editable .
+  pip install build
+  python -m build
+}
+
+function main() {
+  clear
+  echo "What's the name of your project?"
+  read -r PROJECT_NAME
+  clear
+  package_builder "$PROJECT_NAME"
+  package_configuration
+  echo "Completed! :)"
+  sleep 3
+  clear
+}
+
+main
