@@ -20,6 +20,11 @@ function create_source_files() {
 function create_files() {
   printf "Creating files...\n"
   touch ".gitignore"
+  echo "dist/" >>".gitignore"
+  echo "build/" >>".gitignore"
+  echo "__pycache__/" >>".gitignore"
+  echo "venv/" >>".gitignore"
+  echo "*.pyc" >>".gitignore"
   touch "README.md"
   touch "LICENSE"
   touch "pyproject.toml"
